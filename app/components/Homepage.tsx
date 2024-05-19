@@ -1,10 +1,51 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/pro-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import { useEffect, useRef } from 'react';
+import Card from './Card';
 import FloatIntoScreen from './FloatIntoScreen';
+
+const projects = [
+	{
+		hosted: 'https://www.revwise.co.uk/',
+		image: '/work/revwise/revwise-cover-image.webp',
+		title: 'RevWise',
+		description: 'RevWise global Affiliate Management Agencies marketing website.',
+		technologies: ['nextjs', 'contentful', 'framer-motion', 'tailwind'],
+	},
+	{
+		image: '/work/revwise/revwise-cover-image.webp',
+		title: 'RevWise',
+		description: 'RevWise global Affiliate Management Agencies marketing website.',
+		technologies: ['nextjs', 'contentful', 'framer-motion', 'tailwind'],
+	},
+	{
+		image: '/work/revwise/revwise-cover-image.webp',
+		title: 'RevWise',
+		description: 'RevWise global Affiliate Management Agencies marketing website.',
+		technologies: ['nextjs', 'contentful', 'framer-motion', 'tailwind'],
+	},
+	{
+		image: '/work/revwise/revwise-cover-image.webp',
+		title: 'RevWise',
+		description: 'RevWise global Affiliate Management Agencies marketing website.',
+		technologies: ['nextjs', 'contentful', 'framer-motion', 'tailwind'],
+	},
+	{
+		image: '/work/revwise/revwise-cover-image.webp',
+		title: 'RevWise',
+		description: 'RevWise global Affiliate Management Agencies marketing website.',
+		technologies: ['nextjs', 'contentful', 'framer-motion', 'tailwind'],
+	},
+	{
+		image: '/work/revwise/revwise-cover-image.webp',
+		title: 'RevWise',
+		description: 'RevWise global Affiliate Management Agencies marketing website.',
+		technologies: ['nextjs', 'contentful', 'framer-motion', 'tailwind'],
+	},
+];
 
 export default function Homepage() {
 	const $black = useRef<HTMLDivElement>(null);
@@ -55,11 +96,11 @@ export default function Homepage() {
 
 	return (
 		<div className="bg-neutral-100">
-			<main className="flex flex-col items-center justify-center w-full relative h-screen">
+			<main className="flex flex-col items-center justify-center w-full relative h-[90dvh]">
 				<section className="text-neutral-900 z-10 w-full h-full items-center md:gap-20 gap-4 font-mono text-sm lg:flex bg-neutral-100 absolute top-0 left-0">
 					<div
 						ref={$blackCircle}
-						className="rounded-full bg-neutral-900 size-6 md:size-8 absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+						className="rounded-full bg-neutral-900  size-6 md:size-8 absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none"
 					/>
 
 					<div className="z-30 container mx-auto p-4">
@@ -120,9 +161,19 @@ export default function Homepage() {
 				id="work"
 				className="relative container mx-auto p-4 text-center py-8 bg-neutral-100 z-30"
 			>
-				<div className="flex items-end gap-2">
+				<div className="flex flex-col md:flex-row items-start md:items-end gap-2">
 					<h2 className="text-2xl md:text-3xl font-sans font-extrabold">Recent work</h2>
-					<p className="text-lg">Explore my most recent projects!</p>
+					<p className="text-lg font-mono">Explore my most recent projects!</p>
+				</div>
+
+				<div className="grid grid-cols-12 mt-4 text-start gap-4">
+					{projects.map((project, index) => {
+						return (
+							<div key={index} className="col-span-12 md:col-span-4">
+								<Card {...project} />
+							</div>
+						);
+					})}
 				</div>
 			</section>
 		</div>
