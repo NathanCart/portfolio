@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 import Tooltip from './Tooltip';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGlobe } from '@fortawesome/pro-regular-svg-icons';
 
 interface ICard {
 	title: string;
@@ -14,13 +16,13 @@ interface ICard {
 
 export default function Card(props: ICard) {
 	return (
-		<div className="border-[1px] rounded-lg p-4 hover:border-neutral-300 bg-neutral-50 hover:bg-neutral-100 transition-all">
+		<div className="border-[1px] rounded-lg p-4 hover:border-neutral-400 bg-neutral-50 hover:bg-neutral-100 transition-all">
 			{!!props.hosted?.length ? (
 				<a target="_blank" rel="noopener noreferrer" href={`${props.hosted}`}>
 					<Image
-						className="rounded-md"
+						className="rounded-md object-cover"
 						src={props.image}
-						alt="RevWise"
+						alt={props.title}
 						width={2000}
 						height={400}
 					/>
@@ -39,9 +41,9 @@ export default function Card(props: ICard) {
 			<div className="flex gap-1 items-center mt-2">
 				<h3 className="text-xl font-sans font-semibold ">{props.title}</h3>
 				{!props.github?.length ? (
-					<Tooltip text="No Github link available" className="flex-1">
+					<Tooltip text="No Github link available" className="">
 						<Image
-							className="rounded-md h-5 w-5 opacity-30"
+							className="rounded-md h-5 w-5 opacity-30 "
 							src={`/logos/github-logo.png`}
 							alt={`Github logo`}
 							width={50}
@@ -53,7 +55,7 @@ export default function Card(props: ICard) {
 						rel="noopener noreferrer"
 						target="_blank"
 						href={`${props.github}`}
-						className="flex-1"
+						className=""
 					>
 						<Image
 							className="rounded-md h-5 w-5"
@@ -62,6 +64,21 @@ export default function Card(props: ICard) {
 							width={50}
 							height={50}
 						/>
+					</a>
+				)}
+				{!props.hosted?.length ? (
+					<Tooltip text="No hosted link available" className="flex">
+						<FontAwesomeIcon className="opacity-30 size-5" icon={faGlobe} />
+					</Tooltip>
+				) : (
+					<a
+						aria-label="Hosted link"
+						className="flex"
+						rel="noopener noreferrer"
+						target="_blank"
+						href={`${props.hosted}`}
+					>
+						<FontAwesomeIcon className="size-5" icon={faGlobe} />
 					</a>
 				)}
 			</div>
