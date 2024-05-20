@@ -19,6 +19,18 @@ const config: Config = {
 			},
 		},
 		keyframes: {
+			rotate: {
+				'0%': {
+					transform: 'rotate(0deg) scale(0.9)',
+				},
+				'50%': {
+					transform: 'rotate(180deg) scale(1.2)',
+				},
+				'100%': {
+					transform: 'rotate(360deg) scale(0.9)',
+				},
+			},
+
 			blob: {
 				'0%, 100%': {
 					transform: 'translate(0, 0) scale(1) rotate(0deg) skew(0deg, 0deg)',
@@ -177,6 +189,8 @@ const config: Config = {
 			},
 		},
 		animation: {
+			spin: 'rotate 10s linear infinite',
+			quickSpin: 'rotate 1s linear infinite',
 			blob: 'blob 15s infinite linear',
 			blobTwo: 'blobTwo 13s infinite linear',
 			blobThree: 'blobThree 17s infinite linear',

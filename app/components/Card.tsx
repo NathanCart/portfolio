@@ -26,13 +26,11 @@ export default function Card(props: ICard) {
 				{!!props.hosted?.length ? (
 					<a target="_blank" rel="noopener noreferrer" href={`${props.hosted}`}>
 						<Image
-							className={`rounded-md object-cover transition-all ${
-								viewMore ? 'opacity-0' : 'opacity-100'
-							}`}
+							className={`rounded-md object-contain bg-neutral-200 transition-all w-full h-[250px] `}
 							src={props.image}
 							alt={props.title}
 							width={2000}
-							height={400}
+							height={250}
 						/>
 					</a>
 				) : (
@@ -40,19 +38,15 @@ export default function Card(props: ICard) {
 						<Image
 							className="rounded-md"
 							src={props.image}
-							alt="RevWise"
+							alt={props.title}
 							width={2000}
 							height={400}
 						/>
 					</Tooltip>
 				)}
-				{!!props.detailedDescription?.length && viewMore && (
-					<p className="absolute top-0 left-0 p-4 font-mono text-sm">
-						{props.detailedDescription}
-					</p>
-				)}
-				<div className="flex gap-1 items-center mt-2">
-					<h3 className="text-xl font-sans font-semibold ">{props.title}</h3>
+
+				<div className={`flex gap-1 items-center mt-2 `}>
+					<h3 className={`text-xl font-sans font-semibold `}>{props.title}</h3>
 					{!props.github?.length ? (
 						<Tooltip text="No Github link available" className="">
 							<Image
@@ -95,13 +89,22 @@ export default function Card(props: ICard) {
 						</a>
 					)}
 				</div>
-				<div className="flex gap-2 my-1">
+				<div className={`flex gap-2 my-1`}>
 					{props.technologies.map((technology, index) => {
 						return (
-							<Tooltip key={index} text={technology?.split('-')?.join(' ')}>
+							<Tooltip
+								key={index}
+								text={
+									technology
+										?.split('.')[0]
+										?.split('-')
+										?.join(' ')
+										.split('logo')[0]
+								}
+							>
 								<Image
 									className="rounded-md h-5 w-5"
-									src={`/logos/${technology.toLowerCase()}-logo.svg`}
+									src={`/logos/${technology.toLowerCase()}`}
 									alt={`${technology} logo`}
 									width={0}
 									height={0}
@@ -110,7 +113,14 @@ export default function Card(props: ICard) {
 						);
 					})}
 				</div>
-				<p className="text-md font-mono">{props.description}</p>
+				<p className={`text-md font-mono ${viewMore && 'hidden'}`}>{props.description}</p>
+				{!!props.detailedDescription?.length && viewMore && (
+					<div>
+						<p className="mt-2 font-mono text-sm  overflow-hidden">
+							{props.detailedDescription}
+						</p>
+					</div>
+				)}
 				{!!props.detailedDescription?.length && (
 					<>
 						<button
