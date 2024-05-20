@@ -14,6 +14,8 @@ const projects = [
 		image: '/work/revwise/revwise-cover-image.webp',
 		title: 'RevWise',
 		description: 'RevWise global Affiliate Management Agencies marketing website.',
+		detailedDescription:
+			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
 		technologies: ['nextjs', 'contentful', 'framer-motion', 'tailwind'],
 	},
 	{
@@ -248,7 +250,7 @@ export default function Homepage() {
 						</FloatIntoScreen>
 						<FloatIntoScreen direction="left" y={200} bounce={0.45}>
 							<Link href="#work">
-								<div className="flex gap-4 items-center mt-1 md:mt-4 hover:text-red-500 transition-all">
+								<div className="flex gap-4 items-center mt-1 md:mt-4 hover:text-blue-500 transition-all">
 									<h2 className="text-3xl md:text-5xl font-sans">Work</h2>
 									<FontAwesomeIcon size="2x" icon={faArrowRight} />
 								</div>
@@ -261,10 +263,14 @@ export default function Homepage() {
 				id="work"
 				className="relative container mx-auto p-4 text-center py-8 bg-neutral-100 z-30"
 			>
-				<div className="flex flex-col md:flex-row items-start md:items-end gap-2">
-					<h2 className="text-2xl md:text-3xl font-sans font-extrabold">Recent work</h2>
-					<p className="text-lg font-mono">Explore my most recent projects!</p>
-				</div>
+				<FloatIntoScreen direction="left" y={100} bounce={0.4}>
+					<div className="flex flex-col md:flex-row items-start md:items-end md:gap-2">
+						<h2 className="text-2xl md:text-3xl font-sans font-extrabold">
+							Recent work
+						</h2>
+						<p className="md:text-lg font-mono">Explore my most recent projects!</p>
+					</div>
+				</FloatIntoScreen>
 
 				<div className="grid grid-cols-12 mt-4 text-start gap-4">
 					{projects.map((project, index) => {
