@@ -189,6 +189,7 @@ const config: Config = {
 			},
 		},
 		animation: {
+			spinOnce: 'rotate 0.5s linear forwards',
 			spin: 'rotate 10s linear infinite',
 			quickSpin: 'rotate 1s linear infinite',
 			blob: 'blob 15s infinite linear',

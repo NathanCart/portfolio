@@ -131,7 +131,7 @@ export default function Header() {
 								Experience
 							</p>
 						</Link>
-						<Link href="#projects">
+						<Link href="/projects">
 							<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
 								Projects
 							</p>
@@ -230,7 +230,7 @@ export default function Header() {
 								Experience
 							</p>
 						</Link>
-						<Link href="#projects">
+						<Link href="/projects">
 							<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
 								Projects
 							</p>

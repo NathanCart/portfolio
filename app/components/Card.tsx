@@ -6,8 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faGlobe } from '@fortawesome/pro-regular-svg-icons';
 import { useState } from 'react';
 import FloatIntoScreen from './FloatIntoScreen';
+import Link from 'next/link';
 
 interface ICard {
+	slug: string;
 	title: string;
 	description: string;
 	image: string;
@@ -18,8 +20,6 @@ interface ICard {
 }
 
 export default function Card(props: ICard) {
-	const [viewMore, setViewMore] = useState(false);
-
 	return (
 		<FloatIntoScreen className="h-full">
 			<div className="border-[1px] rounded-lg p-4 hover:border-neutral-400 bg-neutral-50 hover:bg-neutral-100 transition-all h-full relative">
@@ -46,7 +46,9 @@ export default function Card(props: ICard) {
 				)}
 
 				<div className={`flex gap-1 items-center mt-2 `}>
-					<h3 className={`text-xl font-sans font-semibold `}>{props.title}</h3>
+					<h3 className={`text-xl font-sans font-semibold line-clamp-1`}>
+						{props.title}
+					</h3>
 					{!props.github?.length ? (
 						<Tooltip text="No Github link available" className="">
 							<Image
@@ -113,24 +115,13 @@ export default function Card(props: ICard) {
 						);
 					})}
 				</div>
-				<p className={`text-md font-mono ${viewMore && 'hidden'}`}>{props.description}</p>
-				{!!props.detailedDescription?.length && viewMore && (
-					<div>
-						<p className="mt-2 font-mono text-sm  overflow-hidden">
-							{props.detailedDescription}
-						</p>
-					</div>
-				)}
-				{!!props.detailedDescription?.length && (
-					<>
-						<button
-							onClick={() => setViewMore((prev) => !prev)}
-							className="mt-1 font-semibold mr-1 hover:text-blue-500 transition-all"
-						>
-							{viewMore ? 'Hide details' : 'View details'}
-						</button>
-					</>
-				)}
+				<p className={`text-md font-mono`}>{props.description}</p>
+
+				<Link href={`/projects/${props.slug}`}>
+					<button className="mt-1 font-semibold mr-1 hover:text-blue-500 transition-all">
+						View details
+					</button>
+				</Link>
 			</div>
 		</FloatIntoScreen>
 	);

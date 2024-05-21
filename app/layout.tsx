@@ -6,7 +6,7 @@ import { GeistMono } from 'geist/font/mono';
 import IconProvider from './components/IconProvider';
 
 export const metadata: Metadata = {
-	title: 'Homepage | Nathan Carter | Web Developer',
+	title: 'Nathan Carter Web Developer',
 	description: 'Nathan Carter is a full-stack developer based in the UK.',
 	alternates: {
 		canonical: '',
@@ -21,7 +21,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
 			<IconProvider>
-				<body className="min-h-screen ">{children}</body>
+				<body className="min-h-screen bg-neutral-100">{children}</body>
 			</IconProvider>
 		</html>
 	);

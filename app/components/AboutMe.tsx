@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import FloatIntoScreen from './FloatIntoScreen';
+import Image from 'next/image';
+import Chip from './Chip';
 
 export default function AboutMe() {
 	return (
@@ -18,6 +20,39 @@ export default function AboutMe() {
 
 			<div className="grid-cols-8 md:grid-cols-12 grid mt-4">
 				<div className="text-start col-span-8">
+					<FloatIntoScreen direction="left" y={100} bounce={0.4}>
+						<div className="mb-4 flex gap-2 items-end">
+							<a
+								href="https://github.com/NathanCart"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<Image
+									className="rounded-md size-8 hover:scale-105 transition-all"
+									src={`/logos/github-logo.png`}
+									alt={`Github logo`}
+									width={100}
+									height={100}
+								/>
+							</a>
+							<a
+								href="https://www.linkedin.com/in/nathan-carter-782725297/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<Image
+									className="rounded-md size-8 hover:scale-105 transition-all"
+									src={`/logos/linkedin-logo.svg`}
+									alt={`Github logo`}
+									width={100}
+									height={100}
+								/>
+							</a>
+							{/* TODO Add CV Link */}
+							<Chip text="View CV" className="cursor-pointer" />
+						</div>
+					</FloatIntoScreen>
+
 					<FloatIntoScreen direction="right" y={100} bounce={0.4}>
 						<p className="text-lg font-semibold">Hey there, {"I'm"} Nathan Carter!</p>
 					</FloatIntoScreen>
@@ -40,8 +75,8 @@ export default function AboutMe() {
 							<br />
 							<br /> Whether {"it's"} crafting smooth, responsive front-ends or
 							tackling complex back-end logic, I thrive on creating seamless user
-							experiences. When {"I'm"} not coding, you can find me at the gym
-							power-lifting, playing video games, or hanging out with friends!
+							experiences. When {"I'm"} not coding, you can find me with my partner,
+							at the gym , playing video games or hanging out with friends!
 						</p>
 					</FloatIntoScreen>
 				</div>
@@ -62,6 +97,72 @@ export default function AboutMe() {
 					</svg>
 				</div>
 			</div>
+			<FloatIntoScreen direction="left" y={100} bounce={0.4}>
+				<div
+					className="flex flex-col md:flex-row items-start text-start md:items-end md:gap-2 mt-4"
+					id="experience"
+				>
+					<h2 className="text-xl md:text-2xl font-sans font-semibold">
+						Company experience
+					</h2>
+					<p className="md:text-md font-mono">
+						Discover the amazing companies {"I've"} worked with!
+					</p>
+				</div>
+
+				<div className="flex gap-2 max-w-2xl flex-wrap mt-4">
+					<a
+						className="flex-shrink-0"
+						href="https://ballenstudios.com"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<Chip text="Ballen Studios" />
+					</a>
+					<a
+						className="flex-shrink-0 cursor-pointer"
+						href="https://merlincloud.ai"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<Chip text="Merlin Cloud" />
+					</a>
+					<a
+						className="flex-shrink-0 cursor-pointer"
+						href="https://www.pmi.com"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<Chip text="Philip Morris" />
+					</a>
+					<a
+						className="flex-shrink-0 cursor-pointer"
+						href="https://and-element.com"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<Chip text="And Element" />
+					</a>
+					<a
+						className="flex-shrink-0 cursor-pointer"
+						href="https://www.ajg.com/uk"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<Chip text="Gallagher" />
+					</a>
+					<a
+						className="flex-shrink-0 cursor-pointer"
+						href="https://armakarma.insure"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<Chip text="Arma Karma" className="cursor-pointer shrink-0" />
+					</a>
+
+					<Chip text="And More..." disableAnimation />
+				</div>
+			</FloatIntoScreen>
 		</section>
 	);
 }
