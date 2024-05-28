@@ -1,4 +1,7 @@
 import armaKarmaVeygo from './aramaKarmaVeygo';
+import att from './att';
+import ballen from './ballen';
+import mod from './mod';
 import revwise from './revwise';
 
 export interface Project {
@@ -6,7 +9,7 @@ export interface Project {
 	seoTitle: string;
 	seoDescription: string;
 	slug: string;
-	hosted: string;
+	hosted?: string;
 	image: string;
 	title: string;
 	description: string;
@@ -20,13 +23,19 @@ export function getBlogBySlug(slug: string): Project | null {
 	switch (slug) {
 		case 'revwise':
 			return revwise;
+		case 'ballen-dashboard':
+			return ballen;
 		case 'arma-karma-veygo':
 			return armaKarmaVeygo;
+		case 'mctc-learner-platform':
+			return mod;
+		case 'anglian-truck-tyres':
+			return att;
 		default:
 			return null;
 	}
 }
 
-const projects: Project[] = [revwise, armaKarmaVeygo];
+const projects: Project[] = [ballen, mod, revwise, armaKarmaVeygo, att];
 
 export default projects;

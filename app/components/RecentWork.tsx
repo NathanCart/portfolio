@@ -20,9 +20,9 @@ export default function RecentWork() {
 				</div>
 			</FloatIntoScreen>
 			<div className="grid grid-cols-12 mt-4 text-start gap-4">
-				{projects.map((project, index) => {
+				{projects?.slice(0, 6).map((project, index) => {
 					return (
-						<div key={index} className="col-span-12 md:col-span-6 lg:col-span-4">
+						<div key={index} className="col-span-12 sm:col-span-6 lg:col-span-4">
 							<Card {...project} />
 						</div>
 					);

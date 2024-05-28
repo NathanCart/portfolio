@@ -22,11 +22,11 @@ interface ICard {
 export default function Card(props: ICard) {
 	return (
 		<FloatIntoScreen className="h-full">
-			<div className="border-[1px] rounded-lg p-4 hover:border-neutral-400 bg-neutral-50 hover:bg-neutral-100 transition-all h-full relative">
+			<div className="border-[1px] rounded-lg p-4 hover:border-neutral-400 bg-neutral-50 hover:bg-neutral-100 transition-all h-full relative grid">
 				{!!props.hosted?.length ? (
 					<a target="_blank" rel="noopener noreferrer" href={`${props.hosted}`}>
 						<Image
-							className={`rounded-md object-contain bg-neutral-200 transition-all w-full h-[250px] `}
+							className={`rounded-md object-cover transition-all w-full h-[250px] max-h-[250px]`}
 							src={props.image}
 							alt={props.title}
 							width={2000}
@@ -36,11 +36,11 @@ export default function Card(props: ICard) {
 				) : (
 					<Tooltip text="No hosted link available">
 						<Image
-							className="rounded-md"
+							className={`rounded-md object-cover transition-all w-full h-[250px] max-h-[250px]`}
 							src={props.image}
 							alt={props.title}
 							width={2000}
-							height={400}
+							height={250}
 						/>
 					</Tooltip>
 				)}

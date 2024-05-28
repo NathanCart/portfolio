@@ -5,11 +5,12 @@ const revwise: Project = {
 	seoDescription: 'RevWise global Affiliate Management Agencies marketing website.',
 	slug: 'revwise',
 	hosted: 'https://www.revwise.co.uk/',
-	image: '/work/revwise/revwise-cover-image.webp',
+	image: '/work/revwise/revwise-phone-cover.webp',
 	title: 'RevWise',
 	description: 'RevWise global Affiliate Management Agencies marketing website.',
 	what: 'RevWise is a global Affiliate Management Agencies marketing website. The goal is to win an award for outstanding design / UI / UX. The website will summarise the services that RevWise offers and provide a contact form for potential clients to get in touch. Advanced animations will be used to make the website more engaging. The website will be built using Next.js and Contentful.',
 	technologies: [
+		'react-logo.svg',
 		'nextjs-logo.svg',
 		'contentful-logo.svg',
 		'framer-motion-logo.svg',
