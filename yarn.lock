@@ -2212,7 +2212,7 @@ pirates@^4.0.1:
   resolved "https://registry.npmjs.org/pirates/-/pirates-4.0.6.tgz"
   integrity sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==
 
-plaiceholder@>=3.0.0:
+plaiceholder@^3.0.0, plaiceholder@>=3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/plaiceholder/-/plaiceholder-3.0.0.tgz"
   integrity sha512-jwHxxHPnr1BwRzPCeZgEK2BMsEy2327sWynw3qb6XC/oGgGDUTPtR8pFxFQmNArhMBwhkUbUr5OPhhIJpCa8eQ==
