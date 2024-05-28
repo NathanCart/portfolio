@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import fs from 'node:fs/promises';
-import getPlaiceholder from '@plaiceholder/next';
+import { getPlaiceholder } from 'plaiceholder';
 
 export default async function BlurImage({
 	src,
@@ -14,6 +14,9 @@ export default async function BlurImage({
 	const buffer = await fs.readFile(`./public${src}`);
 
 	const { base64 } = await getPlaiceholder(buffer);
+
+	console.log(base64, 'base64');
+
 	return (
 		<Image
 			className={className}
