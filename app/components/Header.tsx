@@ -62,10 +62,10 @@ export default function Header() {
 
 	return (
 		<main
-			className="flex flex-col items-center justify-center w-full relative h-[90dvh]"
+			className="flex flex-col items-center justify-center w-full relative h-[90dvh] cursor-none"
 			ref={$container}
 		>
-			<section className="text-neutral-900 z-10 w-full h-full items-center md:gap-20 gap-4 font-mono text-sm flex bg-neutral-100 absolute top-0 left-0">
+			<section className=" text-neutral-900 z-10 w-full h-full items-center md:gap-20 gap-4 font-mono text-sm flex bg-neutral-100 absolute top-0 left-0">
 				<Image
 					priority
 					src="/blobs/blob-1.svg"

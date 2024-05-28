@@ -34,8 +34,16 @@ export default function Project({ params }: { params: { slug: string } }) {
 	const project = getBlogBySlug(params.slug);
 
 	if (!project) {
-		return <div>Project not found</div>;
+		return (
+			<div className="bg-neutral-100 h-full">
+				<div className="z-30 container mx-auto p-4 relative h-full flex gap-4 flex-col justify-center mt-4">
+					<p>Project not found</p>
+				</div>
+			</div>
+		);
 	}
+
+	console.log(!project.hosted?.length, 'hosted');
 
 	return (
 		<div className="bg-neutral-100 h-full">
@@ -89,17 +97,35 @@ export default function Project({ params }: { params: { slug: string } }) {
 					</h1>
 				</FloatIntoScreen>
 				<div className="w-[400px] max-w-full">
-					<a target="_blank" rel="noopener noreferrer " href={`${project.hosted}`}>
+					{!project.hosted?.length ? (
 						<FloatIntoScreen direction="right" y={100} bounce={0.6}>
-							<Image
-								className="object-cover"
-								src={project.image}
-								alt={project.title}
-								width={400}
-								height={200}
-							/>
+							<Tooltip text="No hosted link available" className="flex">
+								<Image
+									placeholder="blur"
+									blurDataURL={project.image}
+									className={`rounded-md object-cover transition-all w-full h-[250px] max-h-[250px]`}
+									src={project.image}
+									alt={project.title}
+									width={400}
+									height={200}
+								/>
+							</Tooltip>
 						</FloatIntoScreen>
-					</a>
+					) : (
+						<a target="_blank" rel="noopener noreferrer " href={`${project.hosted}`}>
+							<FloatIntoScreen direction="right" y={100} bounce={0.6}>
+								<Image
+									placeholder="blur"
+									blurDataURL={project.image}
+									className={`rounded-md object-cover transition-all w-full h-[250px] max-h-[250px]`}
+									src={project.image}
+									alt={project.title}
+									width={400}
+									height={200}
+								/>
+							</FloatIntoScreen>
+						</a>
+					)}
 				</div>
 				<div className="max-w-2xl flex flex-col gap-4">
 					<FloatIntoScreen y={120} bounce={0.3}>
