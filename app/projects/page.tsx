@@ -1,6 +1,4 @@
 import projects from '@/utils/projects';
-import Header from '../components/Header';
-import Homepage from '../components/Homepage';
 import Card from '../components/Card';
 import FloatIntoScreen from '../components/FloatIntoScreen';
 

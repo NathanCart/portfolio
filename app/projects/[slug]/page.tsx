@@ -1,10 +1,10 @@
+import BlurImage from '@/app/components/BlurImage';
 import FloatIntoScreen from '@/app/components/FloatIntoScreen';
 import Tooltip from '@/app/components/Tooltip';
 import projects, { getBlogBySlug } from '@/utils/projects';
-import { faArrowRight, faGlobe } from '@fortawesome/pro-regular-svg-icons';
+import { faGlobe } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
 	const project = getBlogBySlug(params.slug);
@@ -42,8 +42,6 @@ export default function Project({ params }: { params: { slug: string } }) {
 			</div>
 		);
 	}
-
-	console.log(!project.hosted?.length, 'hosted');
 
 	return (
 		<div className="bg-neutral-100 h-full">
@@ -100,28 +98,20 @@ export default function Project({ params }: { params: { slug: string } }) {
 					{!project.hosted?.length ? (
 						<FloatIntoScreen direction="right" y={100} bounce={0.6}>
 							<Tooltip text="No hosted link available" className="flex">
-								<Image
-									placeholder="blur"
-									blurDataURL={project.image}
+								<BlurImage
 									className={`rounded-md object-cover transition-all w-full h-[250px] max-h-[250px]`}
 									src={project.image}
 									alt={project.title}
-									width={400}
-									height={200}
 								/>
 							</Tooltip>
 						</FloatIntoScreen>
 					) : (
 						<a target="_blank" rel="noopener noreferrer " href={`${project.hosted}`}>
 							<FloatIntoScreen direction="right" y={100} bounce={0.6}>
-								<Image
-									placeholder="blur"
-									blurDataURL={project.image}
+								<BlurImage
 									className={`rounded-md object-cover transition-all w-full h-[250px] max-h-[250px]`}
 									src={project.image}
 									alt={project.title}
-									width={400}
-									height={200}
 								/>
 							</FloatIntoScreen>
 						</a>

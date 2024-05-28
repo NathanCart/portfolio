@@ -7,6 +7,7 @@ import { faArrowRight, faGlobe } from '@fortawesome/pro-regular-svg-icons';
 import { useState } from 'react';
 import FloatIntoScreen from './FloatIntoScreen';
 import Link from 'next/link';
+import BlurImage from './BlurImage';
 
 interface ICard {
 	slug: string;
@@ -26,8 +27,6 @@ export default function Card(props: ICard) {
 				{!!props.hosted?.length ? (
 					<a target="_blank" rel="noopener noreferrer" href={`${props.hosted}`}>
 						<Image
-							placeholder="blur"
-							blurDataURL={props.image}
 							className={`rounded-md object-cover transition-all w-full h-[250px] max-h-[250px]`}
 							src={props.image}
 							alt={props.title}
