@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import fs from 'node:fs/promises';
-import { getPlaiceholder } from 'plaiceholder';
+import getPlaiceholder from '@plaiceholder/next';
 
 export default async function BlurImage({
 	src,
