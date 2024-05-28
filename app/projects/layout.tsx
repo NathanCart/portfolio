@@ -18,12 +18,12 @@ export default function ProjectsLayout({
 		<>
 			<div className="z-30 container mx-auto p-4 relative h-full flex flex-col justify-center">
 				<nav className="absolute top-4 left-0 font-bold flex gap-4 md:gap-8 px-4">
-					<Link href="/#about-me">
+					<Link href="/#about-me" scroll={false}>
 						<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
 							About
 						</p>
 					</Link>
-					<Link href="/#experience">
+					<Link href="/#experience" scroll={false}>
 						<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
 							Experience
 						</p>

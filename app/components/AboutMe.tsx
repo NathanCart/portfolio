@@ -7,7 +7,10 @@ import Chip from './Chip';
 
 export default function AboutMe() {
 	return (
-		<section className="relative container mx-auto p-4 md:py-16 mt-4 text-center py-8 bg-neutral-100 z-30 border-y-2">
+		<section
+			id="about-me"
+			className="relative container mx-auto p-4 md:py-16 mt-4 text-center py-8 bg-neutral-100 z-30 border-y-2"
+		>
 			<FloatIntoScreen direction="left" y={100} bounce={0.4}>
 				<div className="flex flex-col md:flex-row items-start md:items-end md:gap-2">
 					<h2 className="text-2xl md:text-3xl font-sans font-extrabold">About me</h2>
@@ -15,7 +18,7 @@ export default function AboutMe() {
 				</div>
 			</FloatIntoScreen>
 
-			<div className="grid-cols-8 md:grid-cols-12 grid mt-4" id="about-me">
+			<div className="grid-cols-8 md:grid-cols-12 grid mt-4">
 				<div className="text-start col-span-8">
 					<FloatIntoScreen direction="left" y={100} bounce={0.4}>
 						<div className="mb-4 flex gap-2 items-end">
