@@ -1,13 +1,7 @@
 'use client';
 
+import { Bodies, Body, Engine, Render, World } from 'matter-js';
 import { MouseEvent as ReactMouseEvent, RefObject, useEffect, useRef, useState } from 'react';
-import { Bodies, Body, Engine, Events, Render, Vertices, World } from 'matter-js';
-import { faArrowRight } from '@fortawesome/pro-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Link from 'next/link';
-import Card from './Card';
-import FloatIntoScreen from './FloatIntoScreen';
-import Image from 'next/image';
 
 function generateRandomBlob(x: number, y: number, radius: number, points: number = 100) {
 	const angleStep = (Math.PI * 2) / points;
@@ -36,7 +30,7 @@ export default function Canvas({
 	const [canSpawn, setCanSpawn] = useState(true);
 
 	const engine = useRef(Engine.create());
-	const mouseBody = useRef(Body.create({ isStatic: true }));
+	const mouseBody = useRef(Body.create({ isStatic: true, render: { visible: false } }));
 	const $whiteSection = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -49,7 +43,10 @@ export default function Canvas({
 
 	useEffect(() => {
 		// mount
+
 		if (!$container.current) return;
+		World.clear(engine.current.world, false);
+
 		const cw = $container.current.clientWidth;
 		const ch = $container.current.clientHeight;
 
@@ -121,7 +118,17 @@ export default function Canvas({
 		};
 	}, []);
 
-	const isPressed = useRef(false);
+	useEffect(() => {
+		const handleMouseMove = (event: MouseEvent) => {
+			Body.setPosition(mouseBody.current, { x: event.clientX, y: event.clientY });
+		};
+
+		window.addEventListener('mousemove', handleMouseMove);
+
+		return () => {
+			window.removeEventListener('mousemove', handleMouseMove);
+		};
+	}, []);
 
 	const handleAddCircle = (e: ReactMouseEvent<HTMLElement>) => {
 		if (!canSpawn) return;
@@ -132,7 +139,7 @@ export default function Canvas({
 		const vertices = generateRandomBlob(e.clientX, e.clientY, radius);
 		const blob = Bodies.fromVertices(e.clientX, e.clientY, [vertices], {
 			mass: 0.001,
-			restitution: 1,
+			restitution: 0.01,
 			friction: 0.005,
 			render: {
 				fillStyle: blobColor === 'black' ? '#000000' : '#ffffff',
@@ -141,24 +148,6 @@ export default function Canvas({
 
 		World.add(engine.current.world, [blob]);
 
-		// Collision event
-		Events.on(engine.current, 'collisionStart', (event) => {
-			const pairs = event.pairs;
-
-			pairs.forEach((pair) => {
-				const { bodyA, bodyB } = pair;
-				if (bodyA === mouseBody.current || bodyB === mouseBody.current) {
-					const blob = bodyA === mouseBody.current ? bodyB : bodyA;
-					const forceMagnitude = 0.02;
-					const direction = {
-						x: (blob.position.x - mouseBody.current.position.x) * forceMagnitude,
-						y: (blob.position.y - mouseBody.current.position.y) * forceMagnitude,
-					};
-					Body.applyForce(blob, blob.position, direction);
-				}
-			});
-		});
-
 		const wobbleInterval = setInterval(() => {
 			const forceMagnitude = 0.000001;
 			const randomForce = {
@@ -166,14 +155,14 @@ export default function Canvas({
 				y: (Math.random() - 0.5) * forceMagnitude,
 			};
 			Body.applyForce(blob, { x: blob.position.x, y: blob.position.y }, randomForce);
-		}, 100);
+		}, 500);
 
 		// Clean up interval on component unmount
 		return () => clearInterval(wobbleInterval);
 	};
 
 	return (
-		<div ref={$whiteSection} className=" w-full h-full z-10">
+		<div onMouseDown={handleAddCircle} ref={$whiteSection} className="w-full h-full z-10">
 			{children}
 		</div>
 	);
