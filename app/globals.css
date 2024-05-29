@@ -49,3 +49,10 @@ html {
 		transform: rotate(360deg);
 	}
 }
+
+canvas {
+	z-index: 10;
+	top: 0;
+	left: 0;
+	position: absolute;
+}
