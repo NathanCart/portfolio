@@ -138,7 +138,7 @@ export default function Canvas({
 		};
 	}, []);
 
-	const handleAddCircle = (e: ReactMouseEvent<HTMLElement>) => {
+	const handleAddCircle = (e: ReactMouseEvent<HTMLElement> | Touch) => {
 		if (!canSpawn) return;
 
 		// Prevent spawning too many circles
@@ -170,7 +170,12 @@ export default function Canvas({
 	};
 
 	return (
-		<div onMouseOver={handleAddCircle} ref={$whiteSection} className="w-full h-full z-10">
+		<div
+			onTouchMove={(e) => handleAddCircle(e.touches[0] as Touch)}
+			onMouseOver={handleAddCircle}
+			ref={$whiteSection}
+			className="w-full h-full z-10"
+		>
 			{children}
 		</div>
 	);

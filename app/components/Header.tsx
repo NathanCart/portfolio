@@ -134,14 +134,12 @@ export default function Header() {
 							</p>
 						</FloatIntoScreen>
 						<FloatIntoScreen direction="left" y={200} bounce={0.45}>
-							<Link href="/projects">
-								<div className="flex gap-1 items-center mt-1 md:mt-4">
-									<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
-										Projects
-									</p>
-									<FontAwesomeIcon size="lg" icon={faArrowRight} />
-								</div>
-							</Link>
+							<div className="flex gap-1 items-center mt-1 md:mt-4">
+								<p className="text-lg md:text-2xl w-fit font-mono transition-all hover:text-blue-500">
+									<Link href="/projects">Projects</Link>
+								</p>
+								<FontAwesomeIcon size="lg" icon={faArrowRight} />
+							</div>
 						</FloatIntoScreen>
 					</div>
 				</section>
@@ -188,14 +186,12 @@ export default function Header() {
 								</p>
 							</FloatIntoScreen>
 							<FloatIntoScreen direction="left" y={200} bounce={0.45}>
-								<Link href="#projects">
-									<div className="flex gap-1 items-center mt-1 md:mt-4 hover:text-blue-500 transition-all">
-										<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
-											Projects
-										</p>
-										<FontAwesomeIcon size="lg" icon={faArrowRight} />
-									</div>
-								</Link>
+								<div className="flex gap-1 items-center mt-1 md:mt-4 hover:text-blue-500 transition-all">
+									<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
+										<Link href="#projects">Projects</Link>
+									</p>
+									<FontAwesomeIcon size="lg" icon={faArrowRight} />
+								</div>
 							</FloatIntoScreen>
 						</div>
 					</Canvas>
