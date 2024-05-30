@@ -26,6 +26,7 @@ function generateRandomBlob(x: number, y: number, radius: number, points: number
 }
 
 export default function Header() {
+	const [dragging, setDragging] = useState(false);
 	const $black = useRef<HTMLDivElement>(null);
 	const $whiteCircle = useRef<HTMLDivElement>(null);
 	const $blackCircle = useRef<HTMLDivElement>(null);
@@ -51,6 +52,8 @@ export default function Header() {
 		if (!blackElement || !whiteCircle || !blackCircle) return;
 
 		const handleMove = (e: MouseEvent | TouchEvent) => {
+			if (!dragging) return;
+
 			let clientX;
 			let clientY;
 
@@ -80,18 +83,31 @@ export default function Header() {
 			Body.setPosition(mouseBody.current, { x: clientX!, y: clientY! });
 		};
 
-		if (!$container.current) return;
+		const setDragTrue = () => setDragging(true);
+		const setDragFalse = () => setDragging(false);
 
-		$container.current.addEventListener('mousemove', handleMove);
-		$container.current.addEventListener('touchmove', handleMove);
+		const container = $container.current;
+
+		if (container) {
+			container.addEventListener('mousemove', handleMove);
+			container.addEventListener('mousedown', setDragTrue);
+			container.addEventListener('mouseup', setDragFalse);
+			container.addEventListener('touchmove', handleMove);
+			container.addEventListener('touchstart', setDragTrue);
+			container.addEventListener('touchend', setDragFalse);
+		}
 
 		return () => {
-			if (!$container.current) return;
-
-			$container.current.removeEventListener('mousemove', handleMove);
-			$container.current.removeEventListener('touchmove', handleMove);
+			if (container) {
+				container.removeEventListener('mousemove', handleMove);
+				container.removeEventListener('mousedown', setDragTrue);
+				container.removeEventListener('mouseup', setDragFalse);
+				container.removeEventListener('touchmove', handleMove);
+				container.removeEventListener('touchstart', setDragTrue);
+				container.removeEventListener('touchend', setDragFalse);
+			}
 		};
-	}, []);
+	}, [dragging]);
 
 	return (
 		<main
@@ -103,9 +119,9 @@ export default function Header() {
 					<div
 						ref={$blackCircle}
 						style={{ left: '18%', top: '25%', zIndex: 400 }}
-						className="rounded-full bg-neutral-900  size-6 md:size-8 absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+						className={`rounded-full bg-neutral-900 size-6 md:size-8 absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer transition `}
 					/>
-					<div className="z-30 container mx-auto p-4 relative h-full flex flex-col justify-center">
+					<div className="z-30 container mx-auto p-4 relative h-full flex flex-col justify-center pointer-events-none">
 						<nav className="absolute top-4 left-0 font-bold flex gap-4 md:gap-8 px-4">
 							<Link href="#about-me">
 								<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
@@ -154,10 +170,19 @@ export default function Header() {
 						<div
 							style={{ left: '18%', top: '25%' }}
 							ref={$whiteCircle}
-							className="rounded-full bg-neutral-100 size-10 md:size-12 absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-						/>
+							className="rounded-full bg-neutral-100 size-10 md:size-12 absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+						>
+							<p
+								style={{ marginTop: '13px' }}
+								className={`ml-14 whitespace-nowrap font-mono pointer-events-none transition-all ${
+									dragging && 'opacity-0 scale-75'
+								}`}
+							>
+								Drag me
+							</p>
+						</div>
 
-						<div className="z-30 container mx-auto p-4 relative h-full flex flex-col justify-center">
+						<div className="z-30 container mx-auto p-4 relative h-full flex flex-col justify-center pointer-events-none">
 							<nav className="absolute top-4 left-0 font-bold flex gap-4 md:gap-8 px-4">
 								<Link href="#about-me">
 									<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
