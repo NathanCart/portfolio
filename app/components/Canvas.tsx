@@ -171,7 +171,7 @@ export default function Canvas({
 
 	return (
 		<div
-			onTouchMove={(e) => handleAddCircle(e.touches[0] as Touch)}
+			onTouchMoveCapture={(e) => handleAddCircle(e.touches[0] as Touch)}
 			onMouseOver={handleAddCircle}
 			ref={$whiteSection}
 			className="w-full h-full z-10"
