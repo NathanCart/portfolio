@@ -111,7 +111,7 @@ export default function Header() {
 
 	return (
 		<main
-			className="flex flex-col items-center justify-center w-full relative h-[90vh] "
+			className="flex flex-col items-center justify-center w-full relative h-[90vh] select-none"
 			ref={$container}
 		>
 			<Canvas $container={$container} blobColor="black">
@@ -174,7 +174,7 @@ export default function Header() {
 						>
 							<p
 								style={{ marginTop: '13px' }}
-								className={`ml-14 whitespace-nowrap font-mono pointer-events-none transition-all ${
+								className={`ml-14 whitespace-nowrap font-mono pointer-events-none transition-all select-none ${
 									dragging && 'opacity-0 scale-75'
 								}`}
 							>
