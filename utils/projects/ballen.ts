@@ -9,7 +9,7 @@ const ballen: Project = {
 	title: 'Ballen Dashboard',
 	description:
 		'Ballen Dashboard is a web application for employees to research horror stories for the Ballen Youtube organisation.',
-	what: 'Ballen Dashboard is a web application which utilises web scraping and artificial intelligence to provide a huge collection of horror stories for employees to create projects from. We also featured an ai training model which functioned via categorisation of articles. The employees can access these articles via a que and then check the categorisation to tweak how the model categorises data.',
+	what: 'Ballen Dashboard is a web application which utilises web scraping and artificial intelligence to provide a huge collection of horror stories for employees to create projects from. We also featured an ai training model which functioned via categorisation of articles. The employees can access these articles via a queue and then check the categorisation to tweak how the model categorises data.',
 	technologies: ['react-logo.svg', 'mui-logo.png', 'nodejs-logo.svg', 'express-logo.svg'],
 	how: 'My role within building this dashboard was to create the frontend using Material-UI and the backend using Node.js and Express.js. I had to integrate my Express api to communicate with a Django python API which collected masses of horror stories.',
 	conclusion:

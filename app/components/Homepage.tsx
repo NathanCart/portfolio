@@ -6,7 +6,7 @@ import RecentWork from './RecentWork';
 
 export default function Homepage() {
 	return (
-		<div className="bg-neutral-100 overflow-hidden">
+		<div className="bg-neutral-100">
 			{/* <Header /> */}
 			<Header />
 			<AboutMe />
