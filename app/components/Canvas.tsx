@@ -84,12 +84,11 @@ export default function Canvas({
 		for (let i = 0; i < 10; i++) {
 			const x = Math.random() * cw;
 			const y = Math.random() * ch;
-			const radius = 10 + Math.random() * (isMobile ? 10 : 30);
-			const vertices = generateRandomBlob(x, y, radius);
-			const blob = Bodies.fromVertices(x, y, [vertices], {
+			const radius = 10 + Math.random() * (isMobile ? 20 : 40);
+			const blob = Bodies.circle(x, y, radius, {
 				mass: 0.001,
-				restitution: 1,
-				friction: 0.005,
+				restitution: 0.8,
+				friction: 0.1,
 				render: {
 					fillStyle: blobColor === 'black' ? '#000000' : '#ffffff',
 				},
@@ -143,12 +142,12 @@ export default function Canvas({
 
 		// Prevent spawning too many circles
 		setCanSpawn(false);
-		const radius = 10 + Math.random() * (isMobile ? 5 : 10);
+		const radius = 10 + Math.random() * (isMobile ? 7 : 15);
 		const vertices = generateRandomBlob(e.clientX, e.clientY, radius);
-		const blob = Bodies.fromVertices(e.clientX, e.clientY, [vertices], {
+		const blob = Bodies.circle(e.clientX, e.clientY, radius, {
 			mass: 0.001,
-			restitution: 0.01,
-			friction: 0.2,
+			restitution: 1,
+			friction: 0,
 			render: {
 				fillStyle: blobColor === 'black' ? '#000000' : '#ffffff',
 			},
