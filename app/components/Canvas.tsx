@@ -1,5 +1,6 @@
 'use client';
 
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { Bodies, Body, Engine, Render, World } from 'matter-js';
 import { MouseEvent as ReactMouseEvent, RefObject, useEffect, useRef, useState } from 'react';
 
@@ -33,6 +34,12 @@ export default function Canvas({
 	const mouseBody = useRef(Body.create({ isStatic: true, render: { visible: false } }));
 	const $whiteSection = useRef<HTMLDivElement>(null);
 
+	const isMobile = useBreakpoint('sm');
+	const isTablet = useBreakpoint('md');
+	const isComputer = useBreakpoint('lg');
+	const isLargeComputer = useBreakpoint('xl');
+	const isXlLargeComputer = useBreakpoint('2xl');
+
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setCanSpawn(true);
@@ -47,8 +54,8 @@ export default function Canvas({
 		if (!$container.current) return;
 		World.clear(engine.current.world, false);
 
-		const cw = $container.current.clientWidth;
-		const ch = $container.current.clientHeight;
+		const cw = $container.current.getBoundingClientRect().width;
+		const ch = $container.current.getBoundingClientRect().height;
 
 		const render = Render.create({
 			//@ts-ignore
@@ -58,11 +65,12 @@ export default function Canvas({
 				width: cw,
 				height: ch,
 				wireframes: false,
+				wireframeBackground: 'transparent',
 				background: 'transparent',
 			},
 		});
 
-		engine.current.world.gravity.y = 0;
+		engine.current.world.gravity.y = 0.028;
 
 		// boundaries
 		World.add(engine.current.world, [
@@ -76,7 +84,7 @@ export default function Canvas({
 		for (let i = 0; i < 10; i++) {
 			const x = Math.random() * cw;
 			const y = Math.random() * ch;
-			const radius = 10 + Math.random() * 30;
+			const radius = 10 + Math.random() * (isMobile ? 10 : 30);
 			const vertices = generateRandomBlob(x, y, radius);
 			const blob = Bodies.fromVertices(x, y, [vertices], {
 				mass: 0.001,
@@ -116,7 +124,7 @@ export default function Canvas({
 			(render.context as CanvasRenderingContext2D | null) = null;
 			render.textures = {};
 		};
-	}, []);
+	}, [isMobile, isTablet, isComputer, isLargeComputer, isXlLargeComputer]);
 
 	useEffect(() => {
 		const handleMouseMove = (event: MouseEvent) => {
@@ -135,12 +143,12 @@ export default function Canvas({
 
 		// Prevent spawning too many circles
 		setCanSpawn(false);
-		const radius = 10 + Math.random() * 30;
+		const radius = 10 + Math.random() * (isMobile ? 5 : 10);
 		const vertices = generateRandomBlob(e.clientX, e.clientY, radius);
 		const blob = Bodies.fromVertices(e.clientX, e.clientY, [vertices], {
 			mass: 0.001,
 			restitution: 0.01,
-			friction: 0.005,
+			friction: 0.2,
 			render: {
 				fillStyle: blobColor === 'black' ? '#000000' : '#ffffff',
 			},
@@ -162,7 +170,7 @@ export default function Canvas({
 	};
 
 	return (
-		<div onMouseDown={handleAddCircle} ref={$whiteSection} className="w-full h-full z-10">
+		<div onMouseOver={handleAddCircle} ref={$whiteSection} className="w-full h-full z-10">
 			{children}
 		</div>
 	);

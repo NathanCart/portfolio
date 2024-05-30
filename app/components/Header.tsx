@@ -1,18 +1,48 @@
 'use client';
 
+import { MouseEvent as ReactMouseEvent, useEffect, useRef, useState } from 'react';
+import { Bodies, Body, Engine, Events, Render, Vertices, World } from 'matter-js';
 import { faArrowRight } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
 import Card from './Card';
 import FloatIntoScreen from './FloatIntoScreen';
 import Image from 'next/image';
+import Canvas from './Canvas';
+
+function generateRandomBlob(x: number, y: number, radius: number, points: number = 100) {
+	const angleStep = (Math.PI * 2) / points;
+	const vertices = [];
+
+	for (let i = 0; i < points; i++) {
+		const angle = i * angleStep;
+		const offset = Math.random() * radius * 0.6;
+		const px = x + (radius + offset) * Math.cos(angle);
+		const py = y + (radius + offset) * Math.sin(angle);
+		vertices.push({ x: px, y: py });
+	}
+
+	return vertices;
+}
 
 export default function Header() {
 	const $black = useRef<HTMLDivElement>(null);
 	const $whiteCircle = useRef<HTMLDivElement>(null);
 	const $blackCircle = useRef<HTMLDivElement>(null);
 	const $container = useRef<HTMLDivElement>(null);
+	const $whiteSection = useRef<HTMLDivElement>(null);
+	const [canSpawn, setCanSpawn] = useState(true);
+
+	const engine = useRef(Engine.create());
+	const mouseBody = useRef(Body.create({ isStatic: true }));
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setCanSpawn(true);
+		}, 100);
+
+		return () => clearInterval(interval);
+	}, [canSpawn]);
 
 	useEffect(() => {
 		const blackElement = $black.current;
@@ -45,6 +75,9 @@ export default function Header() {
 
 			whiteCircle.style.boxShadow = `0 0 20px 10px rgba(255, 255, 255, 0.5)`;
 			blackCircle.style.boxShadow = `0 0 20px 10px rgba(0, 0, 0, 0.5)`;
+
+			// Update the mouse body position
+			Body.setPosition(mouseBody.current, { x: clientX!, y: clientY! });
 		};
 
 		if (!$container.current) return;
@@ -62,202 +95,112 @@ export default function Header() {
 
 	return (
 		<main
-			className="flex flex-col items-center justify-center w-full relative h-[90vh] cursor-none"
+			className="flex flex-col items-center justify-center w-full relative h-[90vh] "
 			ref={$container}
 		>
-			<section className=" text-neutral-900 z-10 w-full h-full items-center md:gap-20 gap-4 font-mono text-sm flex bg-neutral-100 absolute top-0 left-0">
-				<Image
-					priority
-					src="/blobs/blob-1.svg"
-					alt="Blob 1"
-					width={0}
-					height={0}
-					className="animate-blob absolute top-6 -left-10 h-auto w-[200px]"
-				/>
-				<Image
-					priority
-					src="/blobs/blob-2.svg"
-					alt="Blob 2"
-					width={0}
-					height={0}
-					className="animate-blobThree absolute bottom-28 left-1/2 h-auto w-[150px]"
-				/>
-				<Image
-					src="/blobs/blob-3.svg"
-					alt="Blob 3"
-					width={0}
-					priority
-					height={0}
-					className="animate-blobFour absolute top-3/4 left-3/4 h-auto w-[250px]"
-				/>
-				<Image
-					src="/blobs/blob-4.svg"
-					alt="Blob 4"
-					width={0}
-					priority
-					height={0}
-					className="animate-blob absolute bottom-10 -left-8 h-auto w-[250px]"
-				/>
-				<Image
-					src="/blobs/blob-5.svg"
-					alt="Blob 5"
-					width={0}
-					height={0}
-					priority
-					className="animate-blobSix absolute top-20 right-10 h-auto w-[100px]"
-				/>
-				<Image
-					src="/blobs/blob-6.svg"
-					alt="Blob 6"
-					width={0}
-					priority
-					height={0}
-					className="animate-blob absolute top-1/4 left-1/2 h-auto w-[165px] "
-				/>
-				<div
-					ref={$blackCircle}
-					style={{ left: '18%', top: '25%' }}
-					className="rounded-full bg-neutral-900  size-6 md:size-8 absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-				/>
-				<div className="z-30 container mx-auto p-4 relative h-full flex flex-col justify-center">
-					<nav className="absolute top-4 left-0 font-bold flex gap-4 md:gap-8 px-4">
-						<a href="#about-me">
-							<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
-								About
-							</p>
-						</a>
-						<a href="#experience">
-							<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
-								Experience
-							</p>
-						</a>
-						<Link href="/projects">
-							<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
-								Projects
-							</p>
-						</Link>
-					</nav>
-					<FloatIntoScreen direction="left" y={150} bounce={0.4}>
-						<h1 className="text-5xl md:text-7xl font-sans font-extrabold">
-							Nathan Carter
-						</h1>
-					</FloatIntoScreen>
-					<FloatIntoScreen direction="right" y={250} bounce={0.55}>
-						<p className="text-xl md:text-3xl font-mono">
-							Creating inspiring frontend UI / UX.
-						</p>
-					</FloatIntoScreen>
-					<FloatIntoScreen direction="left" y={200} bounce={0.45}>
-						<Link href="/projects">
-							<div className="flex gap-1 items-center mt-1 md:mt-4">
+			<Canvas $container={$container} blobColor="black">
+				<section className=" text-neutral-900 z-10 w-full h-full items-center md:gap-20 gap-4 font-mono text-sm flex bg-neutral-100 absolute top-0 left-0">
+					<div
+						ref={$blackCircle}
+						style={{ left: '18%', top: '25%', zIndex: 400 }}
+						className="rounded-full bg-neutral-900  size-6 md:size-8 absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+					/>
+					<div className="z-30 container mx-auto p-4 relative h-full flex flex-col justify-center">
+						<nav className="absolute top-4 left-0 font-bold flex gap-4 md:gap-8 px-4">
+							<a href="#about-me">
+								<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
+									About
+								</p>
+							</a>
+							<a href="#experience">
+								<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
+									Experience
+								</p>
+							</a>
+							<Link href="/projects">
 								<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
 									Projects
 								</p>
-								<FontAwesomeIcon size="lg" icon={faArrowRight} />
-							</div>
-						</Link>
-					</FloatIntoScreen>
-				</div>
-			</section>
-			<section
-				ref={$black}
-				style={{ clipPath: 'inset(0 0 0 18%)' }}
-				className="text-neutral-100 z-10 w-full h-full items-center md:gap-20 gap-4 font-mono text-sm flex bg-neutral-900 absolute top-0 left-0"
-			>
-				<Image
-					src="/blobs/blob-white-1.svg"
-					alt="Blob 1"
-					width={0}
-					height={0}
-					priority
-					className="animate-blob absolute top-6 -left-10 h-auto w-[200px]"
-				/>
-				<Image
-					src="/blobs/blob-white-2.svg"
-					alt="Blob 2"
-					width={0}
-					height={0}
-					priority
-					className="animate-blobThree absolute bottom-28 left-1/2 h-auto w-[150px]"
-				/>
-				<Image
-					src="/blobs/blob-white-2.svg"
-					alt="Blob 6"
-					width={0}
-					priority
-					height={0}
-					className="animate-blob absolute top-1/4 left-1/2 h-auto w-[165px]"
-				/>
-				<Image
-					src="/blobs/blob-white-3.svg"
-					alt="Blob 3"
-					width={0}
-					priority
-					height={0}
-					className="animate-blobFour absolute top-3/4 left-3/4 h-auto w-[250px]"
-				/>
-				<Image
-					src="/blobs/blob-white-4.svg"
-					alt="Blob 4"
-					width={0}
-					priority
-					height={0}
-					className="animate-blob absolute bottom-10 -left-8 h-auto w-[250px]"
-				/>
-				<Image
-					src="/blobs/blob-white-5.svg"
-					alt="Blob 5"
-					width={0}
-					height={0}
-					priority
-					className="animate-blobSix absolute top-20 right-10 h-auto w-[100px]"
-				/>
-				<div
-					style={{ left: '18%', top: '25%' }}
-					ref={$whiteCircle}
-					className="rounded-full bg-neutral-100 size-10 md:size-12 absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-				/>
+							</Link>
+						</nav>
+						<FloatIntoScreen direction="left" y={150} bounce={0.4}>
+							<h1 className="text-5xl md:text-7xl font-sans font-extrabold">
+								Nathan Carter
+							</h1>
+						</FloatIntoScreen>
+						<FloatIntoScreen direction="right" y={250} bounce={0.55}>
+							<p className="text-xl md:text-3xl font-mono">
+								Creating inspiring frontend UI / UX.
+							</p>
+						</FloatIntoScreen>
+						<FloatIntoScreen direction="left" y={200} bounce={0.45}>
+							<Link href="/projects">
+								<div className="flex gap-1 items-center mt-1 md:mt-4">
+									<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
+										Projects
+									</p>
+									<FontAwesomeIcon size="lg" icon={faArrowRight} />
+								</div>
+							</Link>
+						</FloatIntoScreen>
+					</div>
+				</section>
+			</Canvas>
+			<div className="[&canvas]:z-[100] ">
+				<section
+					ref={$black}
+					style={{ clipPath: 'inset(0 0 0 18%)' }}
+					className="text-neutral-100 z-10 w-full h-full items-center md:gap-20 gap-4 font-mono text-sm flex bg-neutral-900 absolute top-0 left-0"
+				>
+					<Canvas $container={$container} blobColor="white">
+						<div
+							style={{ left: '18%', top: '25%' }}
+							ref={$whiteCircle}
+							className="rounded-full bg-neutral-100 size-10 md:size-12 absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+						/>
 
-				<div className="z-30 container mx-auto p-4 relative h-full flex flex-col justify-center">
-					<nav className="absolute top-4 left-0 font-bold flex gap-4 md:gap-8 px-4">
-						<a href="#about-me">
-							<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
-								About
-							</p>
-						</a>
-						<a href="#experience">
-							<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
-								Experience
-							</p>
-						</a>
-						<Link href="/projects">
-							<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
-								Projects
-							</p>
-						</Link>
-					</nav>
-					<FloatIntoScreen direction="left" y={150} bounce={0.4}>
-						<h2 className="text-5xl md:text-7xl font-sans font-extrabold">
-							Nathan Carter
-						</h2>
-					</FloatIntoScreen>
-					<FloatIntoScreen direction="right" y={250} bounce={0.55}>
-						<p className="text-xl md:text-3xl font-mono">
-							Creating complex backend integrations.
-						</p>
-					</FloatIntoScreen>
-					<FloatIntoScreen direction="left" y={200} bounce={0.45}>
-						<Link href="#projects">
-							<div className="flex gap-1 items-center mt-1 md:mt-4 hover:text-blue-500 transition-all">
-								<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
-									Projects
+						<div className="z-30 container mx-auto p-4 relative h-full flex flex-col justify-center">
+							<nav className="absolute top-4 left-0 font-bold flex gap-4 md:gap-8 px-4">
+								<a href="#about-me">
+									<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
+										About
+									</p>
+								</a>
+								<a href="#experience">
+									<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
+										Experience
+									</p>
+								</a>
+								<Link href="/projects">
+									<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
+										Projects
+									</p>
+								</Link>
+							</nav>
+							<FloatIntoScreen direction="left" y={150} bounce={0.4}>
+								<h2 className="text-5xl md:text-7xl font-sans font-extrabold">
+									Nathan Carter
+								</h2>
+							</FloatIntoScreen>
+							<FloatIntoScreen direction="right" y={250} bounce={0.55}>
+								<p className="text-xl md:text-3xl font-mono">
+									Creating complex backend integrations.
 								</p>
-								<FontAwesomeIcon size="lg" icon={faArrowRight} />
-							</div>
-						</Link>
-					</FloatIntoScreen>
-				</div>
-			</section>
+							</FloatIntoScreen>
+							<FloatIntoScreen direction="left" y={200} bounce={0.45}>
+								<Link href="#projects">
+									<div className="flex gap-1 items-center mt-1 md:mt-4 hover:text-blue-500 transition-all">
+										<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
+											Projects
+										</p>
+										<FontAwesomeIcon size="lg" icon={faArrowRight} />
+									</div>
+								</Link>
+							</FloatIntoScreen>
+						</div>
+					</Canvas>
+				</section>
+			</div>
 		</main>
 	);
 }
