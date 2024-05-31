@@ -47,7 +47,7 @@ export default function AboutMe() {
 									/>
 								</a>
 								{/* TODO Add CV Link */}
-								<Chip text="View CV" className="cursor-pointer" />
+								{/* <Chip text="View CV" className="cursor-pointer" /> */}
 							</div>
 						</FloatIntoScreen>
 
