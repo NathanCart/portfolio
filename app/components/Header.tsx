@@ -118,8 +118,8 @@ export default function Header() {
 				<section className=" text-neutral-900 z-10 w-full h-full items-center md:gap-20 gap-4 font-mono text-sm flex bg-neutral-100 absolute top-0 left-0">
 					<div
 						ref={$blackCircle}
-						style={{ left: '2%', top: '25%', zIndex: 400 }}
-						className={`rounded-full bg-neutral-900 size-6 md:size-8 absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer transition `}
+						style={{ left: '2%', zIndex: 400 }}
+						className={`rounded-full top-[32%] md:top-[35%] bg-neutral-900 size-6 md:size-8 absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer transition `}
 					/>
 					<div className="z-30 container mx-auto p-4 relative h-full flex flex-col justify-center pointer-events-none">
 						<nav className="absolute top-4 left-0 font-bold flex gap-4 md:gap-8 px-4 pointer-events-auto">
@@ -168,9 +168,9 @@ export default function Header() {
 				>
 					<Canvas $container={$container} blobColor="white">
 						<div
-							style={{ left: '2%', top: '25%' }}
+							style={{ left: '2%' }}
 							ref={$whiteCircle}
-							className="rounded-full bg-neutral-100 size-10 md:size-12 absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+							className="rounded-full top-[32%] md:top-[35%] bg-neutral-100 size-10 md:size-12 absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer"
 						>
 							<p
 								className={`ml-14 mt-[6px] md:mt-[11px]  whitespace-nowrap relative font-mono pointer-events-none transition-all select-none items-center ${
@@ -196,8 +196,8 @@ export default function Header() {
 										Experience
 									</p>
 								</Link>
-								<Link href="/projects">
-									<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
+								<Link href="/projects" className="hover:text-blue-500">
+									<p className="text-lg md:text-2xl font-mono transition-all ">
 										Projects
 									</p>
 								</Link>
@@ -213,7 +213,7 @@ export default function Header() {
 								</p>
 							</FloatIntoScreen>
 							<FloatIntoScreen direction="left" y={200} bounce={0.45}>
-								<div className="flex gap-1 items-center mt-1 md:mt-4 hover:text-blue-500 transition-all pointer-events-auto">
+								<div className="flex gap-1 items-center mt-1 md:mt-4 transition-all pointer-events-auto">
 									<p className="text-lg md:text-2xl font-mono transition-all hover:text-blue-500">
 										<Link href="#projects">Projects</Link>
 									</p>
