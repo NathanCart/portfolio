@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 		canonical: '',
 	},
 };
-<link rel="icon" href="/favicon.ico" sizes="any" />;
 
 export default function RootLayout({
 	children,
