@@ -1,4 +1,5 @@
 import armaKarmaVeygo from './aramaKarmaVeygo';
+import armaKarmaDashboard from './armaKarmaDashboard';
 import armaKarmaMarketing from './armaKarmaMarketing';
 import att from './att';
 import ballen from './ballen';
@@ -34,11 +35,21 @@ export function getBlogBySlug(slug: string): Project | null {
 			return att;
 		case 'arma-karma-marketing':
 			return armaKarmaMarketing;
+		case 'arma-karma-dashboard':
+			return armaKarmaDashboard;
 		default:
 			return null;
 	}
 }
 
-const projects: Project[] = [ballen, mod, revwise, armaKarmaVeygo, armaKarmaMarketing, att];
+const projects: Project[] = [
+	armaKarmaVeygo,
+	armaKarmaMarketing,
+	ballen,
+	revwise,
+	mod,
+	att,
+	armaKarmaDashboard,
+];
 
 export default projects;

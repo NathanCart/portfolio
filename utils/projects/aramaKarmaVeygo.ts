@@ -4,7 +4,7 @@ const armaKarmaVeygo: Project = {
 	seoTitle: 'Arma Karma/Veygo Journey | Nathan Carter Web Developer',
 	seoDescription: 'Arma Karma/Veygo Journey is an insurance journey web application.',
 	slug: 'arma-karma-veygo',
-	hosted: 'https://veygo-item-cover.armakarma.insure/item-selection',
+	hosted: 'https://get-started.armakarma.insure/item-selection',
 	image: '/work/arma-karma/ak-cover.webp',
 	title: 'Arma Karma/Veygo Journey',
 	description: 'Arma Karma/Veygo Journey is an insurance journey web application.',

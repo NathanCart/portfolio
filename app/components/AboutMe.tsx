@@ -182,7 +182,7 @@ export default function AboutMe() {
 						<Chip text="And More..." disableAnimation />
 					</div>
 				</FloatIntoScreen>
-				<FloatIntoScreen direction="left" y={100} bounce={0.4}>
+				<FloatIntoScreen direction="right" y={100} bounce={0.4}>
 					<div
 						className="flex flex-col md:flex-row items-start text-start md:items-end md:gap-2 mt-4"
 						id="experience"
