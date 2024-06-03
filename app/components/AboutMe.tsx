@@ -93,7 +93,7 @@ export default function AboutMe() {
 								<br /> Whether {"it's"} crafting smooth, responsive front-ends or
 								tackling complex back-end logic, I thrive on creating seamless user
 								experiences. When {"I'm"} not coding, you can find me with my
-								partner, at the gym , playing video games or hanging out with
+								partner, at the gym, playing video games or hanging out with
 								friends!
 							</p>
 						</FloatIntoScreen>
