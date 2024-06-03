@@ -201,7 +201,7 @@ export default function AboutMe() {
 							{skills.map((technology, index) => {
 								return (
 									<Tooltip
-										className="shrink-0"
+										className="shrink-0 hover:scale-110 transition-all"
 										key={index}
 										text={
 											technology.skill
