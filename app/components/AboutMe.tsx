@@ -4,6 +4,23 @@ import { useState } from 'react';
 import FloatIntoScreen from './FloatIntoScreen';
 import Image from 'next/image';
 import Chip from './Chip';
+import Tooltip from './Tooltip';
+
+const skills = [
+	{ skill: 'react-logo.svg', link: 'https://react.dev/' },
+	{ skill: 'nextjs-logo.svg', link: 'https://nextjs.org/' },
+	{ skill: 'nodejs-logo.svg', link: 'https://nodejs.org/en' },
+	{ skill: 'mongodb-logo.svg', link: 'https://www.mongodb.com' },
+	{ skill: 'express-logo.svg', link: 'https://expressjs.com/' },
+	{ skill: 'mui-logo.svg', link: 'https://mui.com/' },
+	{
+		skill: 'tailwind-logo.svg',
+		link: 'https://tailwindcss.com',
+	},
+	{ skill: 'tina-logo.svg', link: 'https://tina.io/' },
+	{ skill: 'contentful-logo.svg', link: 'https://www.contentful.com/get-started/' },
+	{ skill: 'framer-motion-logo.svg', link: 'https://www.framer.com/motion/' },
+];
 
 export default function AboutMe() {
 	return (
@@ -163,6 +180,53 @@ export default function AboutMe() {
 						</a>
 
 						<Chip text="And More..." disableAnimation />
+					</div>
+				</FloatIntoScreen>
+				<FloatIntoScreen direction="left" y={100} bounce={0.4}>
+					<div
+						className="flex flex-col md:flex-row items-start text-start md:items-end md:gap-2 mt-4"
+						id="experience"
+					>
+						<h2 className="mt-4 text-xl md:text-2xl font-sans font-extrabold">
+							Skills
+						</h2>
+
+						<p className="md:text-md font-mono">
+							Some of the skills {"I've"} picked up along the way!
+						</p>
+					</div>
+
+					<div className="flex gap-2 max-w-2xl flex-wrap mt-4">
+						<div className={`flex gap-2 md:gap-4 my-1`}>
+							{skills.map((technology, index) => {
+								return (
+									<Tooltip
+										key={index}
+										text={
+											technology.skill
+												?.split('.')[0]
+												?.split('-')
+												?.join(' ')
+												.split('logo')[0]
+										}
+									>
+										<a
+											rel="noopener noreferrer"
+											target="_blank"
+											href={technology.link}
+										>
+											<Image
+												className="rounded-md size-6 md:size-8"
+												src={`/logos/${technology.skill.toLowerCase()}`}
+												alt={`${technology} logo`}
+												width={0}
+												height={0}
+											/>
+										</a>
+									</Tooltip>
+								);
+							})}
+						</div>
 					</div>
 				</FloatIntoScreen>
 			</div>

@@ -1,4 +1,5 @@
 import armaKarmaVeygo from './aramaKarmaVeygo';
+import armaKarmaMarketing from './armaKarmaMarketing';
 import att from './att';
 import ballen from './ballen';
 import mod from './mod';
@@ -31,11 +32,13 @@ export function getBlogBySlug(slug: string): Project | null {
 			return mod;
 		case 'anglian-truck-tyres':
 			return att;
+		case 'arma-karma-marketing':
+			return armaKarmaMarketing;
 		default:
 			return null;
 	}
 }
 
-const projects: Project[] = [ballen, mod, revwise, armaKarmaVeygo, att];
+const projects: Project[] = [ballen, mod, revwise, armaKarmaVeygo, armaKarmaMarketing, att];
 
 export default projects;
