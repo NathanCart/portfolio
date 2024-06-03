@@ -21,9 +21,8 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-			<Head>
-				<link rel="icon" href="/favicon.ico" type="image/<generated>" sizes="<generated>" />
-			</Head>
+			<link rel="icon" href={'/favicon.ico'} sizes="any" />
+
 			<IconProvider>
 				<body className="min-h-screen bg-neutral-100">{children}</body>
 			</IconProvider>
