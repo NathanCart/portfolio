@@ -184,7 +184,7 @@ export default function AboutMe() {
 				</FloatIntoScreen>
 				<FloatIntoScreen direction="right" y={100} bounce={0.4}>
 					<div
-						className="flex flex-col md:flex-row items-start text-start md:items-end md:gap-2 mt-4"
+						className="flex flex-col md:flex-row items-start text-start md:items-end md:gap-2 mt-3"
 						id="experience"
 					>
 						<h2 className="mt-4 text-xl md:text-2xl font-sans font-extrabold">
@@ -197,10 +197,11 @@ export default function AboutMe() {
 					</div>
 
 					<div className="flex gap-2 max-w-2xl flex-wrap mt-4">
-						<div className={`flex gap-2 md:gap-4 my-1`}>
+						<div className={`flex flex-wrap gap-2 md:gap-4 my-1`}>
 							{skills.map((technology, index) => {
 								return (
 									<Tooltip
+										className="shrink-0"
 										key={index}
 										text={
 											technology.skill

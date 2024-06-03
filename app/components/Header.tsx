@@ -2,7 +2,7 @@
 
 import { MouseEvent as ReactMouseEvent, useEffect, useRef, useState } from 'react';
 import { Bodies, Body, Engine, Events, Render, Vertices, World } from 'matter-js';
-import { faArrowRight } from '@fortawesome/pro-regular-svg-icons';
+import { faArrowLeftLong, faArrowRight } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import Card from './Card';
@@ -118,7 +118,7 @@ export default function Header() {
 				<section className=" text-neutral-900 z-10 w-full h-full items-center md:gap-20 gap-4 font-mono text-sm flex bg-neutral-100 absolute top-0 left-0">
 					<div
 						ref={$blackCircle}
-						style={{ left: '18%', top: '25%', zIndex: 400 }}
+						style={{ left: '2%', top: '25%', zIndex: 400 }}
 						className={`rounded-full bg-neutral-900 size-6 md:size-8 absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer transition `}
 					/>
 					<div className="z-30 container mx-auto p-4 relative h-full flex flex-col justify-center pointer-events-none">
@@ -163,22 +163,24 @@ export default function Header() {
 			<div className="[&canvas]:z-[100] ">
 				<section
 					ref={$black}
-					style={{ clipPath: 'inset(0 0 0 18%)' }}
+					style={{ clipPath: 'inset(0 0 0 2%)' }}
 					className="text-neutral-100 z-10 w-full h-full items-center md:gap-20 gap-4 font-mono text-sm flex bg-neutral-900 absolute top-0 left-0"
 				>
 					<Canvas $container={$container} blobColor="white">
 						<div
-							style={{ left: '18%', top: '25%' }}
+							style={{ left: '2%', top: '25%' }}
 							ref={$whiteCircle}
 							className="rounded-full bg-neutral-100 size-10 md:size-12 absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer"
 						>
 							<p
-								style={{ marginTop: '13px' }}
-								className={`ml-14 whitespace-nowrap font-mono pointer-events-none transition-all select-none ${
+								className={`ml-14 mt-[6px] md:mt-[11px]  whitespace-nowrap relative font-mono pointer-events-none transition-all select-none items-center ${
 									dragging && 'opacity-0 scale-75'
 								}`}
 							>
-								Drag me
+								<FontAwesomeIcon size="2x" icon={faArrowLeftLong} />{' '}
+								<span className="absolute top-[14px] left-9 -translate-y-1/2">
+									Drag me
+								</span>
 							</p>
 						</div>
 
