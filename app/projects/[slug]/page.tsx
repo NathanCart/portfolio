@@ -116,7 +116,17 @@ export default function Project({ params }: { params: { slug: string } }) {
 							</FloatIntoScreen>
 						</a>
 					)}
+					{!!project.hosted?.length ? (
+						<a target="_blank" rel="noopener noreferrer" href={project.hosted}>
+							<button className="mt-2 bg-neutral-900 rounded-full border-neutral-300 hover:scale-105 transition-all text-sm md:text-md font-mono px-4 py-1 text-white font-semibold mr-1 ">
+								View website
+							</button>
+						</a>
+					) : (
+						<></>
+					)}
 				</div>
+
 				<div className="max-w-2xl flex flex-col gap-4">
 					<FloatIntoScreen y={120} bounce={0.3}>
 						<div className={`flex gap-2`}>
@@ -144,6 +154,7 @@ export default function Project({ params }: { params: { slug: string } }) {
 							})}
 						</div>
 					</FloatIntoScreen>
+
 					<FloatIntoScreen y={120} bounce={0.3}>
 						<section>
 							<h2 className=" md:text-lg font-sans font-semibold">

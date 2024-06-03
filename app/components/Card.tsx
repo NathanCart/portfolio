@@ -119,7 +119,7 @@ export default function Card(props: ICard) {
 				<p className={`text-md font-mono`}>{props.description}</p>
 
 				<Link href={`/projects/${props.slug}`}>
-					<button className="mt-1 font-semibold mr-1 hover:text-blue-500 transition-all">
+					<button className="bg-neutral-900 rounded-full border-neutral-300 hover:scale-105 transition-all text-sm md:text-md font-mono px-4 py-1 text-white mt-1 font-semibold mr-1 ">
 						View details
 					</button>
 				</Link>
