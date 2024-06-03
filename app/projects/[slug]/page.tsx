@@ -117,11 +117,13 @@ export default function Project({ params }: { params: { slug: string } }) {
 						</a>
 					)}
 					{!!project.hosted?.length ? (
-						<a target="_blank" rel="noopener noreferrer" href={project.hosted}>
-							<button className="mt-2 bg-neutral-900 rounded-full border-neutral-300 hover:scale-105 transition-all text-sm md:text-md font-mono px-4 py-1 text-white font-semibold mr-1 ">
-								View website
-							</button>
-						</a>
+						<FloatIntoScreen direction="right" y={100} bounce={0.6}>
+							<a target="_blank" rel="noopener noreferrer" href={project.hosted}>
+								<button className="mt-2 bg-neutral-900 rounded-full border-neutral-300 hover:scale-105 transition-all text-sm md:text-md font-mono px-4 py-1 text-white font-semibold mr-1 ">
+									View website
+								</button>
+							</a>
+						</FloatIntoScreen>
 					) : (
 						<></>
 					)}
