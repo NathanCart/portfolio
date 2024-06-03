@@ -12,7 +12,7 @@ const armaKarmaVeygo: Project = {
 	technologies: [
 		'react-logo.svg',
 		'nextjs-logo.svg',
-		'mui-logo.png',
+		'mui-logo.svg',
 		'nodejs-logo.svg',
 		'express-logo.svg',
 	],
