@@ -119,7 +119,7 @@ export default function Header() {
 					<div
 						ref={$blackCircle}
 						style={{ left: '2%', zIndex: 400 }}
-						className={`rounded-full top-[32%] md:top-[35%] bg-neutral-900 size-6 md:size-8 absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer transition `}
+						className={`rounded-full top-[29%] md:top-[35%] bg-neutral-900 size-6 md:size-8 absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer transition `}
 					/>
 					<div className="z-30 container mx-auto p-4 relative h-full flex flex-col justify-center pointer-events-none">
 						<nav className="absolute top-4 left-0 font-bold flex gap-4 md:gap-8 px-4 pointer-events-auto">
@@ -170,7 +170,7 @@ export default function Header() {
 						<div
 							style={{ left: '2%' }}
 							ref={$whiteCircle}
-							className="rounded-full top-[32%] md:top-[35%] bg-neutral-100 size-10 md:size-12 absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+							className="rounded-full top-[29%] md:top-[35%] bg-neutral-100 size-10 md:size-12 absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer"
 						>
 							<p
 								className={`ml-14 mt-[6px] md:mt-[11px]  whitespace-nowrap relative font-mono pointer-events-none transition-all select-none items-center ${
