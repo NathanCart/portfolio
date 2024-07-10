@@ -4,7 +4,7 @@ const revwise: Project = {
 	seoTitle: 'RevWise | Nathan Carter Web Developer',
 	seoDescription: 'RevWise global Affiliate Management Agencies marketing website.',
 	slug: 'revwise',
-	hosted: 'https://www.revwise.com/',
+	hosted: 'https://revwise.com/',
 	image: '/work/revwise/revwise-phone-cover.webp',
 	title: 'RevWise',
 	description: 'RevWise global Affiliate Management Agencies marketing website.',
